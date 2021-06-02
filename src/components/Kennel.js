@@ -1,7 +1,10 @@
-import React from "react"
-import { NavBar } from "./nav/NavBar"
-import { ApplicationViews } from "./ApplicationViews"
-import "./Kennel.css"
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import { ApplicationViews } from "./ApplicationViews";
+import { NavBar } from "./nav/NavBar";
+import { Login } from "./auth/Login";
+import { Register } from "./auth/Register";
+import "./Kennel.css";
 
 //<AnimalList> component is a child of the <AnimalProvider> component. It is crucial that you wrap components that need data with the provider component that exposes that data in JSX
 
@@ -11,12 +14,30 @@ export const Kennel = () => (
         <h3><small>Loving care when you're not there.</small></h3>
 
         <address>
-        <h3><div>Visit Us at the Nashville North Location</div>
-            <div>500 Puppy Way, Nashville, TN.</div></h3>
+            <h3><div>Visit Us at the Nashville North Location</div>
+                <div>500 Puppy Way, Nashville, TN.</div></h3>
         </address>
 
-        <NavBar />
-        <ApplicationViews />
+        <Route
+            render={() => {
+                if (localStorage.getItem("kennel_customer")) {
+                    return (
+                        <>
+                            <NavBar />
+                            <ApplicationViews />
+                        </>
+                    );
+                } else {
+                    return <Redirect to="/login" />;
+                }
+            }}
+        />
 
+        <Route path="/login">
+            <Login />
+        </Route>
+        <Route path="/register">
+            <Register />
+        </Route>
     </>
 )

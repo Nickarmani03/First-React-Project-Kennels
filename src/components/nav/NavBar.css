@@ -2,6 +2,9 @@
     display: flex;
     flex-wrap: nowrap;
     justify-content: left;
+    background-color: rgb(159, 170, 192);
+    color: #1122cc;
+    padding: 1em;
 }
 
 .navbar__item {

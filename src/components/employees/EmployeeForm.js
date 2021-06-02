@@ -52,7 +52,7 @@ export const EmployeeForm = () => {
     
 
     if (locationId === 0) {
-      window.alert("Please select a location.")
+      window.alert("Please select a location below.")
     } else {
       //Invoke addEmployee passing the new Employee object as an argument
       //Once complete, change the url and display the Employee list
