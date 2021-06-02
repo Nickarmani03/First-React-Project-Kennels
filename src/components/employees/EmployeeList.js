@@ -1,5 +1,8 @@
+import "./Employees.css"
 import React, { useContext, useEffect } from "react"  // useContext hook allows you to use data structures and functions that a parent provider component exposes.
 //useEffect hook allows the component to reach out into the world for anything that cannot be handled during render. In this case, it is the API call for the employees
+
+import { useHistory } from 'react-router-dom' //useHistory() is a hook function provided by react-router-dom. It allows you to immediately use a push() method which you can use to change the URL.
 
 import { EmployeeContext } from "./EmployeeProvider"
 //  returns again. It has three key/value pairs on the object is exposes to its children.  
@@ -23,27 +26,38 @@ export const EmployeeList = () => {
     getEmployees()
   }, []) //Logic within functions only occur when a function is invoked. Within a React component, useEffect is a function. After the return, useEffect is automatically invoked and since the dependency array is empty, it only runs the first time the component renders. gets the permanent state
 
+  const history = useHistory()
 
   return ( //returns the JSX
-    <section className="employees">
-      {console.log("EmployeeList: Render", employees)}
-      {
-        employees.map(employee => { //.map() array method to iterate the array of employees and generate HTML for each one.
-        
-          return (   //html version
+    <>
+      <h2>Employees</h2>
+      <div className="vertical-center">
+      <button onClick={
+        () => history.push("/employees/create")
+      }>
+        Add Employee
+  </button>
+  </div>
+      <section className="employees">
+        {console.log("EmployeeList: Render", employees)}
+        {
+          employees.map(employee => { //.map() array method to iterate the array of employees and generate HTML for each one.
 
-            // interpolates below//
-             <div className="employee" key={employee.id} id={`employee--${employee.id}`}> 
-              <div className="employee__name">
-                Name: { employee.name }
+            return (   //html version
+
+              // interpolates below//
+              <div className="employee" key={employee.id} id={`employee--${employee.id}`}>
+                <div className="employee__name">
+                  Name: {employee.name}
+                </div>
+                <div className="employee__location">
+                  location: {employee.location.name}
+                </div>
               </div>
-              <div className="employee__location">
-                location: { employee.location.name }
-              </div>
-            </div>
-          )
-        })
-      }
-    </section>
+            )
+          })
+        }
+      </section>
+    </>
   )
 }

@@ -4,7 +4,7 @@
 /*Typography
 --------------------------------------------------------------*/
 body,
-button,
+
 input,
 select,
 textarea {
@@ -12,11 +12,13 @@ textarea {
   font-family: "Comfortaa", Arial, sans-serif;
   font-size: 14px;
   line-height: 1.5;
+
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6, small {
   font-family: "Patua One", serif;
   letter-spacing: 2px;
+  text-align: center;
 }
 
 p {
@@ -31,4 +33,12 @@ strong {
 
 address {
   margin: 0 0 1.5em;
+}
+
+.vertical-center {
+  text-align: center;
+  color: #404040;
+  font-family: "Comfortaa", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.
 }
