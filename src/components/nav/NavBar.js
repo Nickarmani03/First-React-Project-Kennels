@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom" //allows to generate hyperlink. decides what will be rendered to the user
 import "./NavBar.css"
 
 //NavBar: This is a Presentation Component. Directly expresses HTML.

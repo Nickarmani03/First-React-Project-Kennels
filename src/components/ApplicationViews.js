@@ -8,6 +8,9 @@ import { EmployeeList } from "./employees/EmployeeList"
 import { EmployeeProvider } from "./employees/EmployeeProvider"
 import { CustomerList } from "./customers/CustomerList"
 import { CustomerProvider } from "./customers/CustomerProvider"
+import { AnimalForm } from "./animal/AnimalForm"
+import { EmployeeForm } from "./employees/EmployeeForm"
+import { LocationForm } from "./locations/LocationForm"
 
 //ApplicationViews: This is a Controller Component. Its only responsibility to to control the behavior of the system and maps URLs to components.
 
@@ -18,19 +21,31 @@ export const ApplicationViews = () => { // the ApplicationViews component, you w
             <LocationProvider>
                 <Route exact path="/"> {/* exact is needed on the first route, otherwise it will also match the other routes, and the Home will render for every route. */}
                     <LocationList />
-                 </Route> {/*The <Link/> and the <Route/> JSX elements are complementary to each other. */}
+                </Route> {/*The <Link/> and the <Route/> JSX elements are complementary to each other. */}
             </LocationProvider>
 
             {/* Render the animal list when http://localhost:3000/animals */}
             <AnimalProvider>
-                <Route path="/animals">
+                <Route exact path="/animals">
                     <AnimalList />
                 </Route>
+                <LocationProvider>
+                    <CustomerProvider>
+                        <EmployeeProvider>
+                            <Route exact path="/animals/create">
+                                <AnimalForm />
+                            </Route>
+                        </EmployeeProvider>
+                    </CustomerProvider>
+                </LocationProvider>
             </AnimalProvider>
 
             <LocationProvider>
-                <Route path="/locations">
+                <Route exact path="/locations">
                     <LocationList />
+                </Route>
+                <Route exact path="/locations/create">
+                    <LocationForm />
                 </Route>
             </LocationProvider>
 
@@ -41,11 +56,17 @@ export const ApplicationViews = () => { // the ApplicationViews component, you w
             </CustomerProvider>
 
             <EmployeeProvider>
-                <Route path="/employees">
+                <Route exact path="/employees">
                     <EmployeeList />
                 </Route>
-            </EmployeeProvider>
+                <LocationProvider>
 
+                    <Route exact path="/employees/create">
+                        <EmployeeForm />
+                    </Route>
+
+                </LocationProvider>
+            </EmployeeProvider>
         </>
     )
 }

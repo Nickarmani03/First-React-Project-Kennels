@@ -9,6 +9,8 @@ import { LocationContext } from "./LocationProvider"
 
 import "./Locations.css"
 
+import { useHistory } from 'react-router-dom'
+
 export const LocationList = () => {
   // This state changes when `getlocations()` is invoked below
   const { locations, getLocations } = useContext(LocationContext) //lets you pull in any context needed. deconstrust the objects
@@ -23,8 +25,19 @@ export const LocationList = () => {
     getLocations()
   }, []) //Logic within functions only occur when a function is invoked. Within a React component, useEffect is a function. After the return, useEffect is automatically invoked and since the dependency array is empty, it only runs the first time the component renders. gets the permanent state
 
+  
+  const history = useHistory()
 
   return ( //returns the JSX
+    <>
+    <h2>Locations</h2>
+    <div className="vertical-center">
+    <button onClick={
+      () => history.push("/locations/create")
+    }>
+          Add Location
+    </button>
+    </div>
     <section className="locations">
       {console.log("LocationList: Render", locations)}
       {
@@ -44,5 +57,6 @@ export const LocationList = () => {
         })
       }
     </section>
+    </>
   )
 }

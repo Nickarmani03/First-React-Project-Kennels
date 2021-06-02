@@ -1,5 +1,7 @@
 import React, { useState, createContext } from "react" // useState  to hold and set the array of animals.
 
+//provider manages state
+
 // The context is imported and used by individual components that need data
 export const AnimalContext = createContext()
 //Context stores a certain kind of data to be used in your application
@@ -24,23 +26,24 @@ export const AnimalProvider = (props) => { //transfers the data back and forth
     if (animalsData !== null && Array.isArray(animalsData)) {
         animals = animalsData
     }
+    //? is another filter
 }*/
 
-    const getAnimals = () => {
-        return fetch("http://localhost:8088/animals?_expand=location")
+const getAnimals = () => {
+     return fetch("http://localhost:8088/animals?_expand=customer&_expand=location&_sort=location.id")
         .then(res => res.json())
         .then(setAnimals) //changes the variable. updates the state
     }
 
-    const addAnimal = animalObj => {
+    const addAnimal = animal => {//Animal is an object
         return fetch("http://localhost:8088/animals", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(animalObj)
+            body: JSON.stringify(animal)
         })
-        .then(getAnimals)
+        .then(response => response.json())
     }
 
     /*
