@@ -14,7 +14,7 @@ export const Kennel = () => (
         <h3><small>Loving care when you're not there.</small></h3>
 
         <address>
-            <h3><div>Visit Us at the Nashville North Location</div>
+            <h3><div>Visit us at the Nashville North Location</div>
                 <div>500 Puppy Way, Nashville, TN.</div></h3>
         </address>
 

@@ -1,4 +1,5 @@
-import React, { useState, createContext } from "react" // useState  to hold and set the array of employees.
+import React from "react";
+import { createContext, useState } from "react"; // useState  to hold and set the array of employees.
 
 // The context is imported and used by individual components that need data
 export const EmployeeContext = createContext()
@@ -14,7 +15,7 @@ export const EmployeeProvider = (props) => { //transfers the data back and forth
     const [employees, setEmployees] = useState([])// defines a variable to hold state. useState gets invoked passed as an arguement. like saying useApplicationState
     // the hook to define a variable that holds the state of the component, and a function that updates it
     //use state deconstructs the array. the first item is the first item is the value of the array its nothing at this time it means let employees = []. the second item is a funtion
-    //the first item holds the state and the second mutates the state
+    //the first item holds the state and the second mutates the state. not permanent until we use a fetch request
 
 /*   -Define the variable which will hold the data.
    let employees = []
@@ -26,23 +27,24 @@ export const EmployeeProvider = (props) => { //transfers the data back and forth
     }
 }*/
 
-    const getEmployees = () => {
-        return fetch("http://localhost:8088/employees?_expand=location")
-        .then(res => res.json())
-        .then(setEmployees) //changes the variable. updates the state
-    }
+const getEmployees = () => {
+    return fetch("http://localhost:8088/employees?_expand=location")
+      .then((res) => res.json())
+      .then(setEmployees);
+  }
 
-    const addEmployee = employeeObj => {
+    const addEmployee = (employeeObj) => {
         return fetch("http://localhost:8088/employees", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             },
-            body: JSON.stringify(employeeObj)
+            body: JSON.stringify(employeeObj),
         })
         .then(getEmployees)
     }
 
+    
     /*
         You return a context provider which has the
         `employees` state, `getemployees` function,

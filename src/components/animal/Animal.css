@@ -8,7 +8,9 @@
       flex-basis: 28%;
       margin: 1em;
       padding: 1em;
-      border: 1px solid goldenrod;
+      border: 1px solid rgb(75, 32, 218);
+      text-align: center;
+      font-family: "Comfortaa", Arial, sans-serif;
   }
 
   .animalForm {

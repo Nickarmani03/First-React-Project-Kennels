@@ -1,6 +1,6 @@
 import React, { useState, createContext } from "react" // useState  to hold and set the array of animals.
 
-//provider manages state
+//provider manages state. the provider components handle all interactions with the database
 
 // The context is imported and used by individual components that need data
 export const AnimalContext = createContext()
@@ -11,7 +11,7 @@ export const AnimalContext = createContext()
 // This component establishes what data can be used.
 export const AnimalProvider = (props) => { //transfers the data back and forth
     //the components that uses the data must be defined as children components, and React will send an object to each component.
-    // probs is the arguemtn getting passed
+    // probs is the arguement getting passed
 
     const [animals, setAnimals] = useState([])// defines a variable to hold state. useState gets invoked passed as an arguement. like saying useApplicationState
     // the hook to define a variable that holds the state of the component, and a function that updates it
@@ -26,7 +26,7 @@ export const AnimalProvider = (props) => { //transfers the data back and forth
     if (animalsData !== null && Array.isArray(animalsData)) {
         animals = animalsData
     }
-    //? is another filter
+    ? is another filter
 }*/
 
 const getAnimals = () => {
@@ -46,6 +46,17 @@ const getAnimals = () => {
         .then(response => response.json())
     }
 
+    const releaseAnimal = animalId => {
+        return fetch(`http://localhost:8088/animals/${animalId}`, {
+            method: "DELETE"
+        })
+            .then(getAnimalById)
+    }
+    const getAnimalById = animalId => {
+        return fetch(`http://localhost:8088/animals/${animalId}?_expand=customer&_expand=location&_sort=location.id`)
+        .then (res => res.json())
+    }
+    
     /*
         You return a context provider which has the
         `animals` state, `getAnimals` function,
@@ -54,7 +65,7 @@ const getAnimals = () => {
     */
     return (
         <AnimalContext.Provider value={{ //what this provider exposes to the rest of the application
-            animals, getAnimals, addAnimal //the value is an object with these as keys it will allow each one to be invoked. will allow other modules to access them
+             animals, getAnimals, addAnimal, getAnimalById, releaseAnimal//the value is an object with these as keys it will allow each one to be invoked. will allow other modules to access them
         }}>
             {props.children} 
         </AnimalContext.Provider>  // pros = properties of all child componets
