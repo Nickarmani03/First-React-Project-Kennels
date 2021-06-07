@@ -62,7 +62,7 @@ export const EmployeeForm = () => {
       }
 
       addEmployee(newEmployee)
-        .then(() => history.push("/employees"))
+        .then(() => history.push("/employees")) //takes you to the page in quotes. refreshes the page and pushes the user page to the brower. appends it to the address bar
     }
   }
 

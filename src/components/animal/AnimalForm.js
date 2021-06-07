@@ -65,6 +65,7 @@ export const AnimalForm = () => {
         locationId: locationId,
         customerId: customerId
       }
+      
       addAnimal(newAnimal)
         .then(() => history.push("/animals"))
     }

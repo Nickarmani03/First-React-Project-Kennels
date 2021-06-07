@@ -27,7 +27,7 @@ export const LocationProvider = (props) => { //transfers the data back and forth
 }*/
 
     const getLocations = () => {
-        return fetch("http://localhost:8088/locations")
+        return fetch("http://localhost:8088/locations?_embed=employees&_embed=animals")
         .then(res => res.json())
         .then(setLocations) //changes the variable. updates the state
     }
@@ -42,7 +42,10 @@ export const LocationProvider = (props) => { //transfers the data back and forth
         })
         .then(getLocations)
     }
-
+    const getLocationsById = locationId => {
+        return fetch(`http://localhost:8088/locations/${locationId}/?_embed=employees&_embed=animals`)
+        .then(res => res.json())        
+    }
     /*
         You return a context provider which has the
         `locations` state, `getlocations` function,
@@ -51,7 +54,7 @@ export const LocationProvider = (props) => { //transfers the data back and forth
     */
     return (
         <LocationContext.Provider value={{ //what this provider exposes to the rest of the application
-            locations, getLocations, addLocation //the value is an object with these as keys it will allow each one to be invoked. will allow other modules to access them
+            locations, getLocations, addLocation, getLocationsById//the value is an object with these as keys it will allow each one to be invoked. will allow other modules to access them
         }}>
             {props.children} 
         </LocationContext.Provider>  // pros = properties of all child componets

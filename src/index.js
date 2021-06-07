@@ -4,6 +4,8 @@ import { BrowserRouter as Router } from "react-router-dom"
 import { Kennel } from "./components/Kennel.js"
 import "./index.css"
 
+// the first JavaScript file that runs in our app
+
 ReactDOM.render(
     <React.StrictMode>
         <Router>

@@ -24,12 +24,12 @@ export const NavBar = (props) => {
                 <Link className="navbar__link" to="/employees">Employees</Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link" 
-                onClick={
-                    (event) => {
-                        localStorage.removeItem("kennel_customer")
+                <Link className="navbar__link"
+                    onClick={ //allows the user to logout by removing them from the local storage
+                        (event) => {
+                            localStorage.removeItem("kennel_customer")
+                        }
                     }
-                }
                 >Logout</Link>
             </li>
         </ul>

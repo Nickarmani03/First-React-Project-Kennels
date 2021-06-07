@@ -11,6 +11,9 @@ import { CustomerProvider } from "./customers/CustomerProvider"
 import { AnimalForm } from "./animal/AnimalForm"
 import { EmployeeForm } from "./employees/EmployeeForm"
 import { LocationForm } from "./locations/LocationForm"
+import { AnimalDetail } from "./animal/AnimalDetail"
+import { LocationDetail } from "./locations/LocationDetail"
+import { EmployeeDetail } from "./employees/EmployeeDetail"
 
 //ApplicationViews: This is a Controller Component. Its only responsibility to to control the behavior of the system and maps URLs to components.
 
@@ -25,17 +28,20 @@ export const ApplicationViews = () => { // the ApplicationViews component, you w
             </LocationProvider>
 
             {/* Render the animal list when http://localhost:3000/animals */}
+
             <AnimalProvider>
                 <Route exact path="/animals">
                     <AnimalList />
                 </Route>
+                <Route exact path="/animals/detail/:animalId(\d+)">
+                    <AnimalDetail />
+                </Route>
+
                 <LocationProvider>
                     <CustomerProvider>
-                        <EmployeeProvider>
-                            <Route exact path="/animals/create">
-                                <AnimalForm />
-                            </Route>
-                        </EmployeeProvider>
+                        <Route exact path="/animals/create">
+                            <AnimalForm />
+                        </Route>
                     </CustomerProvider>
                 </LocationProvider>
             </AnimalProvider>
@@ -44,6 +50,9 @@ export const ApplicationViews = () => { // the ApplicationViews component, you w
                 <Route exact path="/locations">
                     <LocationList />
                 </Route>
+                <Route exact path="/locations/detail/:locationId(\d+)">
+                    <LocationDetail />
+                </Route> 
                 <Route exact path="/locations/create">
                     <LocationForm />
                 </Route>
@@ -59,12 +68,13 @@ export const ApplicationViews = () => { // the ApplicationViews component, you w
                 <Route exact path="/employees">
                     <EmployeeList />
                 </Route>
+                <Route exact path="/employees/detail/:employeeId(\d+)">
+                    <EmployeeDetail />
+                </Route> 
                 <LocationProvider>
-
                     <Route exact path="/employees/create">
                         <EmployeeForm />
                     </Route>
-
                 </LocationProvider>
             </EmployeeProvider>
         </>
