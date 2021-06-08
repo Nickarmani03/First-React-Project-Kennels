@@ -7,3 +7,6 @@ export const Animal = () => (
         <div className="animal__breed">Breed: Poodle</div>
     </section>
 )
+
+
+//jsx expressions can only return one jsx componet for every function. cannot do 2 siblings. you need to use a empty component called a fragment. an unnamed element.

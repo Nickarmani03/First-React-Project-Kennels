@@ -13,7 +13,7 @@ export const EmployeeDetail = () => {
         Given the example URL above, this will store the value
         of 5 in the employeeId variable
     */
-    const { employeeId } = useParams();
+    const { employeeId } = useParams(); // use when there's a dynamic route.
 
 
     useEffect(() => {

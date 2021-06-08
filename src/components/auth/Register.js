@@ -10,7 +10,7 @@ export const Register = (props) => {
     const conflictDialog = useRef()
     const history = useHistory()
 
-    const existingUserCheck = () => {
+    const existingUserCheck = () => { //get me the customr who's email key equals the value entered.we are filtering it asnd get an array with one object.
         return fetch(`http://localhost:8088/customers?email=${email.current.value}`)
             .then(res => res.json())
             .then(user => !!user.length)

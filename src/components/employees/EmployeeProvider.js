@@ -1,5 +1,5 @@
-import React from "react";
-import { createContext, useState } from "react"; // useState  to hold and set the array of employees.
+import React, { useState, createContext } from "react"
+ // useState  to hold and set the array of employees.
 
 // The context is imported and used by individual components that need data
 export const EmployeeContext = createContext()
