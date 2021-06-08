@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom" //allows to generate hyperlink. decides what will be rendered to the user
 import "./NavBar.css"
 
-//NavBar: This is a Presentation Component. Directly expresses HTML.
+//NavBar: This is a Presentation Component for the constant navigation elements. Directly expresses HTML/ JSX.
 
 export const NavBar = (props) => {
     return (
@@ -24,8 +24,8 @@ export const NavBar = (props) => {
                 <Link className="navbar__link" to="/employees">Employees</Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link"
-                    onClick={ //allows the user to logout by removing them from the local storage
+                <Link className="navbar__link" to="/login"
+                    onClick={ //allows the user to logout by removing the current user from the local storage
                         (event) => {
                             localStorage.removeItem("kennel_customer")
                         }

@@ -51,9 +51,9 @@ export const EmployeeList = () => {
                     {employee.name}
                   </Link>
                 </div>
-                <div className="employee__location">
+                {/* <div className="employee__location">
                   Location: {employee.locationId}
-                </div>
+                </div> */}
               </div>
             )
           }

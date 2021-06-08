@@ -47,27 +47,27 @@ export const LocationList = () => {
       <section className="locations">
         {console.log("LocationList: Render", locations)}
         {locations.map(location =>  //.map() array method to iterate the array of locations and generate HTML for each one.
-            // return (   //html version
+          // return (   //html version
 
-            //  interpolates below//
-            //   <div  id={`location--${location.id}` >
-            <div className="location" key={location.id} id={`location--${location.id}`}>
+          //  interpolates below//
+          //   <div  id={`location--${location.id}` >
+          <div className="location" key={location.id} id={`location--${location.id}`}>
             <div className="locations__name">
-            <Link to={`/locations/detail/${location.id}`} key={location.id} className="locations">
-              {location.name}
-            </Link>
+              <Link to={`/locations/detail/${location.id}`} key={location.id} className="locations">
+                {location.name}
+              </Link>
             </div>
-                  <div>
+            {/* <div>
                     {location.employees.length} Employees
                           </div>
                   <div>
                     {location.animals.length} Animals
-                          </div>
-             </div>
+                          </div> */}
+          </div>
 
-          )
+        )
         }
-    </section>
+      </section>
     </>
   )
 }

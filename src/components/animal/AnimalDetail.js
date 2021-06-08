@@ -9,7 +9,7 @@ import { useParams, useHistory } from "react-router-dom"
 export const AnimalDetail = () => {
     const { getAnimalById, releaseAnimal } = useContext(AnimalContext)
     
-    const [animal, setAnimal] = useState({ location: [], customer: [] })
+    const [animal, setAnimal] = useState({ location: {}, customer: {} })
 
     /*
         Given the example URL above, this will store the value
@@ -17,7 +17,7 @@ export const AnimalDetail = () => {
     */
 
     // hook function useParams() allows code to read route parameter from URL
-    const { animalId } = useParams()
+    const { animalId } = useParams() // use when there's a dynamic route.
 
     useEffect(() => {
         getAnimalById(parseInt(animalId)).then((animalObj) => {
@@ -45,9 +45,7 @@ export const AnimalDetail = () => {
             <div className="animal__location">Location: {animal.location.name}</div>
             <div className="animal__owner">Customer: {animal.customer.name}</div>
             <button onClick={handleRelease}>Release Animal</button>
-        {/* <button onClick={() => {
-            history.push(`/animals/edit/${animal.id}`)
-        }}>Edit</button> */}
+            <button onClick={() => {history.push(`/animals/edit/${animal.id}`)}}>Edit</button>
         </section>
     )
 }

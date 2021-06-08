@@ -27,13 +27,13 @@ export const LocationProvider = (props) => { //transfers the data back and forth
 }*/
 
     const getLocations = () => {
-        return fetch("http://localhost:8088/locations?_embed=employees&_embed=animals")
+        return fetch("http://localhost:8088/locations?_embed=employees&_embed=animals") // & is a way to limit the response returned
         .then(res => res.json())
         .then(setLocations) //changes the variable. updates the state
     }
 
     const addLocation = locationObj => {
-        return fetch("http://localhost:8088/locations", {
+        return fetch("http://localhost:8088/locations", { // allows you to add a new location
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -45,7 +45,8 @@ export const LocationProvider = (props) => { //transfers the data back and forth
     const getLocationsById = locationId => {
         return fetch(`http://localhost:8088/locations/${locationId}/?_embed=employees&_embed=animals`)
         .then(res => res.json())        
-    }
+    }//expand- everytime there's a foreign key, expand on the related object.
+    // embed. no foreign key. find the foreign key in another collection that matches the primary key and show all matches
     /*
         You return a context provider which has the
         `locations` state, `getlocations` function,

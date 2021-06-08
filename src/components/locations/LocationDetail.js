@@ -9,7 +9,7 @@ export const LocationDetail = () => {
 
 
     // hook function useParams() allows code to read route parameter from URL
-    const { locationId } = useParams()
+    const { locationId } = useParams() // use when there's a dynamic route.
 
     // dependency stops once animal id is found
     useEffect(() => {
@@ -31,7 +31,7 @@ export const LocationDetail = () => {
                 )}
             </div>
             <div className="location__animals" key={location.id}>
-                <h3>Animals:</h3>
+                <h3>Current Residents:</h3>
                 {location.animals.map(animal =>
                     <div className="location__animal__name"> {animal.name} </div>
                 )}
