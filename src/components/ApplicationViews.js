@@ -77,6 +77,9 @@ export const ApplicationViews = () => { // the ApplicationViews component, you w
                     <Route exact path="/employees/create">
                         <EmployeeForm />
                     </Route>
+                    <Route exact path="/employees/edit/:employeeId(\d+)">
+                            <EmployeeForm />
+                        </Route>
                 </LocationProvider>
             </EmployeeProvider>
         </>

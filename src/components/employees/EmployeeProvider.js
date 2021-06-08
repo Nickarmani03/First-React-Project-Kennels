@@ -44,6 +44,21 @@ const getEmployees = () => {
         .then(getEmployees)
     }
 
+    const updateEmployee = employee => {
+        return fetch(`http://localhost:8088/employees/${employee.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(employee)
+        })
+            .then(getEmployees) // rerenders with the newest API
+    }
+
+    const getEmployeeById = employId => {
+        return fetch(`http://localhost:8088/employees/${employId}?_expand=location`)
+        .then (res => res.json())
+    }
     
     /*
         You return a context provider which has the
@@ -53,7 +68,7 @@ const getEmployees = () => {
     */
     return (
         <EmployeeContext.Provider value={{ //what this provider exposes to the rest of the application
-            employees, getEmployees, addEmployee //the value is an object with these as keys it will allow each one to be invoked. will allow other modules to access them
+            employees, getEmployees, addEmployee, updateEmployee, getEmployeeById //the value is an object with these as keys it will allow each one to be invoked. will allow other modules to access them
         }}>
             {props.children} 
         </EmployeeContext.Provider>  // pros = properties of all child componets
