@@ -10,7 +10,12 @@ import "./Kennel.css";
 
 export const Kennel = () => (
     <>  {/*empty brackets allow you to return more than one thing*/}
-        <h2>Nashville Kennels</h2>
+        <Route
+            render={() => {
+                if (localStorage.getItem("kennel_customer")) {
+                    return (
+                        <>
+                        <h2>Nashville Kennels</h2>
         <h3><small>Loving care when you're not there.</small></h3>
 
         <address>
@@ -18,11 +23,7 @@ export const Kennel = () => (
                 <div>500 Puppy Way, Nashville, TN.</div></h3>
         </address>
 
-        <Route
-            render={() => {
-                if (localStorage.getItem("kennel_customer")) {
-                    return (
-                        <>
+        
                             <NavBar />
                             <ApplicationViews />
                         </>

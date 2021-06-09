@@ -20,7 +20,7 @@ export const AnimalProvider = (props) => { //transfers the data back and forth
 
     //useState is a function returns an array that we need to deconstruct into 2 variables. the first item is the value of the array its an empty array of animals in this case at this time it means let animals = []. it is a variable that holds the state. 
     //the second item is a funtion. it a variable that mutates the state,  SetAnimals in this case. its jobs is to mutate animals to get a new value.  
-
+    const [ searchTerms, setSearchTerms ] = useState("")
 
     /*   -Define the variable which will hold the data.
        let animals = []
@@ -80,7 +80,7 @@ export const AnimalProvider = (props) => { //transfers the data back and forth
     return (
         <AnimalContext.Provider value={//the value of the state is what this provider exposes to the rest of the application. the object below
             { 
-            animals, getAnimals, addAnimal, getAnimalById, releaseAnimal, updateAnimal  //the value is an object with these as keys it will allow each one to be invoked. will allow other modules to access them.
+            animals, getAnimals, addAnimal, getAnimalById, releaseAnimal, updateAnimal,  searchTerms, setSearchTerms //the value is an object with these as keys it will allow each one to be invoked. will allow other modules to access them.
         }
         }>
             {props.children}

@@ -4,7 +4,7 @@ import "./Locations.css"
 import { useParams, useHistory } from "react-router-dom"
 
 export const LocationDetail = () => {
-    const { getLocationsById } = useContext(LocationContext)
+    const { getLocationById } = useContext(LocationContext)
     const [location, setLocation] = useState({ employees: [], animals: [] })
 
 
@@ -13,7 +13,7 @@ export const LocationDetail = () => {
 
     // dependency stops once animal id is found
     useEffect(() => {
-        getLocationsById(parseInt(locationId)
+        getLocationById(parseInt(locationId)
         ).then(location => { setLocation(location) })
     }, [locationId])
 
@@ -31,7 +31,7 @@ export const LocationDetail = () => {
                 )}
             </div>
             <div className="location__animals" key={location.id}>
-                <h3>Current Residents:</h3>
+                <h3>Current Animals:</h3>
                 {location.animals.map(animal =>
                     <div className="location__animal__name"> {animal.name} </div>
                 )}
