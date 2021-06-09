@@ -6,10 +6,10 @@ import { useParams, useHistory } from "react-router-dom"
 
 
 
-export const AnimalDetail = () => {
+export const AnimalDetail = ({ animal }) => {
     const { getAnimalById, releaseAnimal } = useContext(AnimalContext)
-    
-    const [animal, setAnimal] = useState({ location: {}, customer: {} })
+
+    const [useAnimal, setAnimals] = useState({ location: {}, customer: {} })
 
     /*
         Given the example URL above, this will store the value
@@ -20,16 +20,18 @@ export const AnimalDetail = () => {
     const { animalId } = useParams() // use when there's a dynamic route.
 
     useEffect(() => {
-        getAnimalById(parseInt(animalId)).then((animalObj) => {
-            setAnimal(animalObj);
-        });
+        if (animalId) {
+            getAnimalById(parseInt(animalId)).then((animalObj) => {
+                setAnimals(animalObj)
+            });
+        } else { setAnimals(animal) }
     }, [animalId]);
 
     // dependency stops once animal id is found
     const history = useHistory()
 
     const handleRelease = () => {
-        releaseAnimal(animal.id)
+        releaseAnimal(useAnimal.id)
             .then(() => {
                 history.push("/animals")
             })
@@ -40,12 +42,12 @@ export const AnimalDetail = () => {
 
 
         <section className="animal">
-            <h3 className="animal__name">{animal.name}</h3>
-            <div className="animal__breed">{animal.breed}</div>
-            <div className="animal__location">Location: {animal.location.name}</div>
-            <div className="animal__owner">Customer: {animal.customer.name}</div>
+            <h3 className="animal__name">{useAnimal.name}</h3>
+            <div className="animal__breed">Breed: {useAnimal.breed}</div>
+            <div className="animal__location">Location: {useAnimal.location.name}</div>
+            <div className="animal__owner">Customer: {useAnimal.customer.name}</div>
             <button onClick={handleRelease}>Release Animal</button>
-            <button onClick={() => {history.push(`/animals/edit/${animal.id}`)}}>Edit</button>
+            <button onClick={() => { history.push(`/animals/edit/${useAnimal.id}`) }}>Edit</button>
         </section>
     )
 }

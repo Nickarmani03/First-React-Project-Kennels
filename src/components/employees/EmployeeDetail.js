@@ -32,7 +32,6 @@ export const EmployeeDetail = () => {
             <button onClick={() => {
                 history.push(`/employees/edit/${employee.id}`)
             }}>Edit</button>
-
         </section>
     )
 }

@@ -1,23 +1,19 @@
-import React, { useContext, useState } from "react"
+import React, {  useContext, useState, useEffect } from "react"
 import { LocationContext } from "../locations/LocationProvider"
 import "./Locations.css"
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams  } from 'react-router-dom';
 
 export const LocationForm = () => {
-  const { addLocation } = useContext(LocationContext) //defines addLocation
-  const [location, setLocation] = useState({ // what we send to the api to save in permanent state every time the user interacts with input. it will update every time something is typed
-    name: "",
-    address: "",
-  })
+  const { addLocation, getLocations, updateLocation, getLocationById } = useContext(LocationContext) //defines 
+  const [location, setLocation] = useState({}) // what we send to the api to save in permanent state every time the user interacts with input. it will update every time something is typed
   //you cannot directly access and update useState variables in React. you need to use a function to update the state with.
+
+  const [isLoading, setIsLoading] = useState(true)
+  const { locationId } = useParams()
 
   const history = useHistory()
 
-  
-  /*useEffect(() => {
-    }, [])
-    
-    this may be used down the road in the code*/
+
 
   const handleControlledInputChange = (event) => { //user provided input
     const newLocation = { ...location }  //creates a new object that is a copy of the object above with the spread operator. allows the copy to be modified
@@ -26,28 +22,41 @@ export const LocationForm = () => {
     setLocation(newLocation) //updates the new state/ the real state. gets invoked below on the onChange
   }
 
-  const handleClickSaveLocation = (event) => {
-    event.preventDefault() //prevents the default refresh when the user clicks the save button
-
-    /*const locationId = parseInt(animal.locationId)
-    const customerId = parseInt(animal.customerId)
-    if (locationId === 0 || customerId === 0) {
-      window.alert("Please select a location and a customer")
-    } */ 
-      //Invoke addAnimal passing the new animal object as an argument
-      //Once complete, change the url and display the animal list
-
-      const newLocation = {
+  const handleSaveLocation = () => {
+    if (locationId) { // invokes updateLocation
+      updateLocation({
+        id: location.id,
         name: location.name,
-        address: location.address,
-      }
-      addLocation(newLocation) ///state to make the selection permanent. allows it to be saved to the API
+        address: location.address
+      })
+        .then(() => history.push(`/locations/detail/${location.id}`))
+    } else {
+      addLocation({ //else addLocation
+        name: location.name,
+        address: location.address
+      })//state to make the selection permanent. allows it to be saved to the API
         .then(() => history.push("/locations"))
     }
-  
+  }
+
+  useEffect(() => {
+    getLocations().then(() => {
+      if (locationId) {
+        getLocationById(locationId)
+          .then(location => {
+            setLocation(location)
+            setIsLoading(false)
+          })
+      } else {
+        setIsLoading(false)
+      }
+    })
+  }, [])
+
+
 
   return (
-      
+
     <form className="locationForm">
       <h2 className="locationForm__title">New Location</h2>
       <fieldset>
@@ -62,10 +71,14 @@ export const LocationForm = () => {
           <input type="text" id="address" required autoFocus className="form-control" placeholder="Location address" value={location.address} onChange={handleControlledInputChange} />
         </div>
       </fieldset>
-      
-      <button className="btn btn-primary" onClick={handleClickSaveLocation}>
-        Save Location
-          </button>
+      <button className="btn btn-primary"
+        disabled={isLoading}
+        onClick={event => {
+          event.preventDefault()
+          handleSaveLocation()
+        }}>
+        Save location
+        </button>
     </form>
   )
 }
