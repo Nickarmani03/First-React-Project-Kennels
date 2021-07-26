@@ -1,3 +1,8 @@
+First-React-Project-Kennels
+https://github.com/Nickarmani03/First-React-Project-Kennels
+Project Kennels is my first ReactJS based application. It consists of my learning how state works in ReactJS application. It is an app designed to tract pets in a kennel around the Nashville area, to track what worker adds a pet to the kennel and for what customer. 
+I created Project Kennels as an exercise for a remote learning project. It is my first ReactJS project and it consists of a solo built CRUD application that utilizes ReactJS, JavaScript, HTML, and CSS with a custom-built API.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
